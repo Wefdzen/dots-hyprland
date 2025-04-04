@@ -25,7 +25,7 @@ List of programs and tools I use.
 | Login Menu 🚪     | [sddm](https://github.com/sddm/sddm)          |
 | Sound 🎤         | [pipiwire with pulseaudio](https://github.com/raitonoberu/sptlrx)      |
 | Notify ?         | [dunst]()      |
-| Wallpaper ?         | [swwww]()      |
+| Wallpaper ?         | [swww]()      |
 
 ## 🎸 Preview
 
