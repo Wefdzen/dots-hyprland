@@ -1,0 +1,81 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: FontAwesome, JetBrains Mono Bold, sans-serif;
+    min-height: 20px;
+    box-shadow: none; /* Remove all box-shadows */
+}
+
+window#waybar {
+    background: rgba(1, 1, 5, 0.0); /* Transparency added */
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#workspaces {
+    margin-right: 8px;
+    border-radius: 10px;
+    transition: none;
+    background: rgba(56, 60, 74, 0.9); /* Slight transparency */
+    box-shadow: none; /* Remove shadow causing the line */
+}
+
+#workspaces button {
+    transition: none;
+    color: #7c818c;
+    background: transparent;
+    padding: 5px;
+    font-size: 18px;
+    box-shadow: none; /* Remove box-shadow */
+}
+
+#workspaces button.persistent {
+    color: #7c818c;
+    font-size: 12px;
+}
+
+/* Workspace button hover effect */
+#workspaces button:hover {
+    background: #7c818c;
+    color: #383c4a;
+    box-shadow: none;  /* Remove hover effect box-shadow */
+    text-shadow: inherit;
+    border-radius: inherit;
+}
+
+#workspaces button.active {
+    background: rgba(78, 82, 99, 0.75); /* Slight transparency */
+    color: white;
+    border-radius: inherit;
+}
+
+#language, #keyboard-state, #clock, #pulseaudio, #custom-mem, #cpu, #custom-power {
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-right: 8px;
+    border-radius: 10px;
+    transition: none;
+    color: #ffffff;
+    background: rgba(56, 60, 74, 0.75); /* Slight transparency */
+    box-shadow: none; /* Remove shadow */
+}
+
+#pulseaudio {
+    margin-right: 8px;
+}
+
+#pulseaudio.muted {
+    background-color: #90b1b1;
+    color: #2a5c45;
+}
+
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
