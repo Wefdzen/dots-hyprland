@@ -3,30 +3,88 @@
     "position": "top", // Waybar position (top|bottom|left|right)
     "margin": "9 13 -10 18",
     // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces", "hyprland/language"],
-    "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "custom/mem", "cpu", "custom/power"],
-
+    "modules-left": ["hyprland/workspaces", "hyprland/language", "custom/playerctl", "custom/playerlabel"],
+    "modules-center": ["clock","custom/weather"],
+    "modules-right": [ "custom/hyprpicker", "pulseaudio", "custom/mem", "cpu", "custom/power"],
+//"tray",
 
     //***************************
     //*  Modules configuration  *
     //***************************
-
     "hyprland/workspaces": {
-        "disable-scroll": true,
+      "active-only": false,
+      "all-outputs": true,
+      "disable-scroll": false,
+      "on-scroll-up": "hyprctl dispatch workspace -1",
+      "on-scroll-down": "hyprctl dispatch workspace +1",
+      "format": "{icon}",
+      "on-click": "activate",
+      "format-icons": {
+        "urgent": "",
+        "active": "",
+        "default": "󰧞",
+      "sort-by-number": true
+      },
     },
 
     "hyprland/language": {
-        "format-en": "US",
-        "format-ru": "RU",
-	"min-length": 5,
-	"tooltip": false
+      "format-en": "en",
+      "format-ru": "ru",
+      "on-click": "hyprctl switchxkblayout logitech-usb-keyboard next",
+      "min-length": 5,
+      "tooltip": false
+    },
+
+    "custom/playerctl": {
+      "format": "{icon}",
+      "return-type": "json",
+      "max-length": 64,
+      "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+      "on-click-middle": "playerctl play-pause",
+      "on-click": "playerctl previous",
+      "on-click-right": "playerctl next",
+      "format-icons": {
+        "Playing": "<span foreground='#E5B9C6'>󰒮   󰐌   󰒭</span>",
+        "Paused": "<span foreground='#928374'>󰒮   󰏥   󰒭</span>"
+      },
+    },
+
+    "custom/playerlabel": {
+      "format": "<span>{}</span>",
+      "return-type": "json",
+      "max-length": 20,
+      "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+      "on-click-middle": "playerctl play-pause",
+      "on-click": "playerctl previous",
+      "on-click-right": "playerctl next",
+      "format-icons": {
+        "Playing": "<span foreground='#E5B9C6'>󰒮 󰐌 󰒭</span>",
+        "Paused": "<span foreground='#928374'>󰒮 󰏥 󰒭</span>"
+      },
     },
 
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%a, %d %b, %I:%M %p}"
+    },
+
+    // "tray": {
+    //  "icon-size": 16,
+    // "spacing": 5
+    // },
+
+    "custom/weather": {
+      "format": "{}",
+      "interval": 1800,
+      "exec": "~/.config/waybar/scripts/weatherParser/app/app",
+      "return-type": "text"
+    },
+
+    "custom/hyprpicker": {
+        "format": "󰈋",
+        "on-click": "hyprpicker -a -f hex",
+        "on-click-right": "hyprpicker -a -f rgb"
     },
 
     //pavucontorl work and with pipewire
@@ -66,7 +124,7 @@
     },
 
     "custom/power": {
-        "format": "{}",
+        "format": " 󰈸 ",
         "exec": "echo ; echo  logout",
         "on-click": "wlogout",
         "interval" : 86400, // once every day
